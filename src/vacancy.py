@@ -33,6 +33,27 @@ class Vacancy:
                f'требования:  {self.requirements}\n' \
                f'город: {self.city}\n'
 
+    def to_dict(self):
+        return {
+            'job_id': self.job_id,
+            'job_url': self.job_url,
+            'name': self.name,
+            'salary_from': self.salary_from,
+            'requirements': self.requirements,
+            'city': self.city
+            }
+
+    @staticmethod
+    def from_dict(vacan_dict):
+        return Vacancy(
+            vacan_dict['job_id'],
+            vacan_dict['job_url'],
+            vacan_dict['name'],
+            vacan_dict['salary_from'],
+            vacan_dict['requirements'],
+            vacan_dict['city']
+        )
+
 
 class Vacancies:
     def __init__(self):
@@ -45,9 +66,15 @@ class Vacancies:
         for i in old_vacancies:
             self.__all_vacancies.remove(i)
 
-    def filter_vacancies(self):
+    def sort_vacancies_by_salary(self):
         self.__all_vacancies.sort(reverse=True)
 
     @property
     def all_vacancies(self):
         return self.__all_vacancies
+
+    def to_list_dict(self):
+        a = []
+        for i in self.__all_vacancies:
+            a.append(i.to_dict())
+        return a

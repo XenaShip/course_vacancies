@@ -17,15 +17,15 @@ class HeadHunterAPI(JobAPI):
     def get_vacancies(self, name_job):
         url = self.url
         ans = []
-        for i in range(20):
-            par = {'text': name_job, 'per_page': '4', 'page': i}
+        for i in range(2):
+            par = {'text': name_job, 'per_page': '3', 'page': i}
             r = requests.get(url, params=par)
             e = r.json()
             for j in e['items']:
                 job_id = j['id']
                 job_url = j['alternate_url']
                 name = j['name']
-                if not(j['salary'] is None):
+                if not((j['salary'] is None) or (j['salary']['from'] is None)):
                     salary_from = j['salary']['from']
                 else:
                     salary_from = 0
