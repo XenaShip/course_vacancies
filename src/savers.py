@@ -2,7 +2,9 @@ from abc import ABC, abstractmethod
 from src.vacancy import Vacancy, Vacancies
 import json
 
+
 class Saver(ABC):
+    """абстрактный класс для редактирования и обработки списка вакансий"""
     @abstractmethod
     def save_vacancies(self):
         pass
@@ -12,6 +14,7 @@ class Saver(ABC):
 
 
 class JSONSaver(Vacancies, Saver):
+    """класс для обработки списка вакансий в JSON формате"""
     def save_vacancies(self):
         with open('vacancies.json', 'w') as fh:
             json.dump(self.to_list_dict(), fh)

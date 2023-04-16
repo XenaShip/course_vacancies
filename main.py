@@ -1,35 +1,24 @@
 from src.vacancy import Vacancy, Vacancies
 from src.savers import JSONSaver
-from src.jop_api import HeadHunterAPI
+from src.jop_api import HeadHunterAPI, SuperJobAPI
 
 
-# def user_interaction():
-    # platforms = ["HeadHunter", "SuperJob"]
-    # search_query = input("Введите поисковый запрос: ")
-    # top_n = int(input("Введите количество вакансий для вывода в топ N: "))
-    # filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
-    # filtered_vacancies = filter_vacancies(hh_vacancies, superjob_vacancies, filter_words)
+def user_interaction():
+    print('Добро пожаловать! Введите ключевое слово для поиска по профессии')
+    keyword = input()
+    hh_api = HeadHunterAPI()
+    superjob_api = SuperJobAPI()
+    print('Введите кол-во страниц, по которым будет осуществлен поиск')
+    pages = int(input())
+    from_hh = hh_api.get_vacancies(keyword, pages)
+    from_sj = superjob_api.get_vacancies(keyword, pages)
+    print('Найденные вакансии на сайте "HeadHuter":\n')
+    for i in from_hh:
+        print(i)
+    print('Найденные вакансии на сайте "SuperJob":\n')
+    for i in from_sj:
+        print(i)
 
 
 if __name__ == '__main__':
-    # user_interaction()
-    k_word = 'Python'
-    help1 = HeadHunterAPI()
-    a = help1.get_vacancies(k_word)
-    c = JSONSaver()
-    c.add_vacancies(a)
-    for i in c.all_vacancies:
-       print(i)
-    print('_________________________')
-    c.sort_vacancies_by_salary()
-    # for i in c.all_vacancies:
-      #   print(i)
-    d = a[0:1]
-    c.delete_vacancies(d)
-    c.save_vacancies()
-    print('=================')
-    c.read_vacancies()
-#     c.delete_vacancies(d)
-    print('____________________________')
-    for i in c.all_vacancies:
-        print(i)
+    user_interaction()

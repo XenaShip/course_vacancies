@@ -1,10 +1,11 @@
 class Vacancy:
-    def __init__(self, job_id, job_url, name, salary_from, requirements, city):
+    "класс для хранения информации о вакансии"
+    def __init__(self, job_id, job_url, name, salary_from, salary_to, city):
         self.job_id = job_id
         self.job_url = job_url
         self.name = name
         self.salary_from = salary_from
-        self.requirements = requirements
+        self.salary_to = salary_to
         self.city = city
 
     def __eq__(self, other):
@@ -30,32 +31,35 @@ class Vacancy:
                f'ссылка: {self.job_url}\n' \
                f'профессия: {self.name}\n' \
                f'зарплата от: {self.salary_from}\n' \
-               f'требования:  {self.requirements}\n' \
+               f'зарплата до: {self.salary_to}\n' \
                f'город: {self.city}\n'
 
     def to_dict(self):
+        "функция предсталяющая вакансию в виде словаря"
         return {
             'job_id': self.job_id,
             'job_url': self.job_url,
             'name': self.name,
             'salary_from': self.salary_from,
-            'requirements': self.requirements,
+            'salary_to': self.salary_to,
             'city': self.city
             }
 
     @staticmethod
     def from_dict(vacan_dict):
+        """статический метод для перевода словаря в ваканцию"""
         return Vacancy(
             vacan_dict['job_id'],
             vacan_dict['job_url'],
             vacan_dict['name'],
             vacan_dict['salary_from'],
-            vacan_dict['requirements'],
+            vacan_dict['salary_to'],
             vacan_dict['city']
         )
 
 
 class Vacancies:
+    """класс для хранения и обработки вакансий"""
     def __init__(self):
         self.__all_vacancies = []
 
