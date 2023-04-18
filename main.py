@@ -18,6 +18,15 @@ def user_interaction():
     print('Найденные вакансии на сайте "SuperJob":\n')
     for i in from_sj:
         print(i)
+    print('Отсортировать данные и записать в файл?')
+    ans = input()
+    if ans == 'Да':
+        from_hh2 = JSONSaver(from_hh)
+        from_sj2 = JSONSaver(from_sj)
+        from_all = from_sj2 + from_hh2
+        from_all.sort_vacancies_by_salary()
+        from_all.save_vacancies()
+
 
 
 if __name__ == '__main__':
