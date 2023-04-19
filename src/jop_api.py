@@ -32,8 +32,8 @@ class HeadHunterAPI(JobAPI):
                     salary_from = j['salary']['from']
                     salary_to = j['salary']['to']
                 else:
-                    salary_from = j['salary']['from']
-                    salary_to = j['salary']['to']
+                    salary_from = None
+                    salary_to = None
                 if not(j['address'] is None):
                     city = j['address']['city']
                 else:
